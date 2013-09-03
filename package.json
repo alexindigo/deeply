@@ -32,12 +32,12 @@
   "testling" : {
         "files" : "test/*.js",
         "browsers" : [
-            "ie/8..latest",
-            "chrome/latest..canary",
-            "firefox/latest..nightly",
+            "ie/9",
+            "chrome/latest",
+            "firefox/latest",
             "safari/latest",
-            "iphone/6..latest",
-            "ipad/6..latest"
+            "iphone/latest",
+            "ipad/latest"
         ]
     },
   "devDependencies": {
