@@ -1,0 +1,46 @@
+{
+  "name": "deeply",
+  "version": "0.1.0",
+  "description": "Deeply merges properties of the provided objects, returns untangled copy (clone)",
+  "main": "deeply.js",
+  "scripts": {
+    "test": "node ./test"
+  },
+  "ender": "./ender.js",
+  "engines": {
+    "node": ">= 0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alexindigo/deeply.git"
+  },
+  "keywords": [
+    "merge",
+    "deep",
+    "clone",
+    "util",
+    "browser",
+    "client",
+    "server",
+    "ender"
+  ],
+  "author": "Alex Indigo <iam@alexindigo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexindigo/deeply/issues"
+  },
+  "testling" : {
+        "files" : "test/*.js",
+        "browsers" : [
+            "ie/8..latest",
+            "chrome/latest..canary",
+            "firefox/latest..nightly",
+            "safari/latest",
+            "iphone/6..latest",
+            "ipad/6..latest"
+        ]
+    },
+  "devDependencies": {
+    "tape": "~1.0.4"
+  }
+}
