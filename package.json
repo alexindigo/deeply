@@ -29,18 +29,19 @@
   "bugs": {
     "url": "https://github.com/alexindigo/deeply/issues"
   },
-  "testling" : {
-        "files" : "test/*.js",
-        "browsers" : [
-            "ie/9",
-            "chrome/latest",
-            "firefox/latest",
-            "safari/latest",
-            "iphone/latest",
-            "ipad/latest"
-        ]
-    },
+  "testling": {
+    "files": "test/*.js",
+    "browsers": [
+      "ie/9",
+      "chrome/latest",
+      "firefox/latest",
+      "safari/latest",
+      "iphone/latest",
+      "ipad/latest"
+    ]
+  },
   "devDependencies": {
-    "tape": "~1.0.4"
+    "tape": "~1.0.4",
+    "coveralls": "^2.8.0"
   }
 }
