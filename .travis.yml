@@ -8,7 +8,9 @@ node_js:
   - "iojs"
   - "4.2"
   - "stable"
-before_install:
+before_script:
+  - echo HERE
+  - echo $TRAVIS_OS_NAME
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then npm install -g nvm; fi
 after_script:
   - "cat coverage/lcov.info | ./node_modules/.bin/coveralls"
