@@ -7,7 +7,7 @@ Universal (nodejs + browser) library that deeply merges properties of the provid
 [![Coverage Status](https://img.shields.io/coveralls/alexindigo/deeply/master.svg?label=code+coverage)](https://coveralls.io/github/alexindigo/deeply?branch=master)
 
 [![Dependency Status](https://img.shields.io/david/alexindigo/deeply.svg)](https://david-dm.org/alexindigo/deeply)
-[![Codacy Badge](https://img.shields.io/codacy/5f1289b78b7346498797f9f3cd674408.svg)](https://www.codacy.com/app/alexindigo/deeply)
+<!-- Too many false positives [![Codacy Badge](https://img.shields.io/codacy/5f1289b78b7346498797f9f3cd674408.svg)](https://www.codacy.com/app/alexindigo/deeply) -->
 [![bitHound Overall Score](https://www.bithound.io/github/alexindigo/deeply/badges/score.svg)](https://www.bithound.io/github/alexindigo/deeply)
 
 ## Install

@@ -18,7 +18,7 @@ function deeply(/* a[, b[, ...[, reduceArrays]]] */)
     , reduceArrays = typeof args[args.length-1] == 'function' ? args.pop() : undefined
     ;
 
-  while (o = args.shift())
+  while ((o = args.shift()))
   {
     for (prop in o)
     {
