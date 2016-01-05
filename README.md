@@ -12,6 +12,8 @@ Universal (nodejs + browser) library that deeply merges properties of the provid
 
 ## Install
 
+> Version `1.0.0` backwards compatible with `0.1.0` version.
+
 ```
 $ npm install deeply --save
 ```
@@ -21,7 +23,7 @@ $ npm install deeply --save
 ### merge
 – Deeply merges two or more objects.
 
-``` javascript
+```javascript
 var merge = require('deeply');
 
 merge({a: {a1: 1}}, {a: {a2: 2}}); // -> {a: {a1: 1, a2: 2}}
@@ -30,7 +32,7 @@ merge({a: {a1: 1}}, {a: {a2: 2}}); // -> {a: {a1: 1, a2: 2}}
 ### clone
 – As degenerated case of merging one object on itself, it's possible to use deeply as deep clone function.
 
-``` javascript
+```javascript
 var merge = require('deeply');
 var clone = merge;
 
@@ -45,7 +47,7 @@ console.log(x.a.b.c); // -> 1
 ### arrays custom merging
 – By default array treated as primitive values and being replaced upon conflict, for more meaningful array merge strategy, provide custom reduce function as last argument.
 
-``` javascript
+```javascript
 var merge = require('deeply');
 
 // default behavior
@@ -64,7 +66,7 @@ merge({ a: { b: [0, 2, 4] }}, { a: {b: [1, 3, 5] }}, customMerge); // -> { a: { 
 
 ### mutable operations
 
-``` javascript
+```javascript
 var merge = require('deeply/mutable');
 var myObj = {a: {a1: 1, a2: 2}, b: {b1: 11, b2: 12}};
 

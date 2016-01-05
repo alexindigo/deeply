@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint *.js test/*.js",
-    "test": "istanbul cover ./test",
-    "browser": "browserify test/index.js | ghostface | tap-set-exit"
+    "test": "istanbul cover ./test/compatability.js",
+    "browser": "browserify test/compatability.js | ghostface | tap-set-exit"
   },
   "pre-commit": [
     "lint",

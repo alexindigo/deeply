@@ -1,6 +1,7 @@
 var test      = require('tape').test
   , merge     = require('../')
   , stringify = JSON.stringify
+  , now    = new Date()
   , withStuffOnPrototype
   ;
 
@@ -49,7 +50,7 @@ var inout =
     in:
       [
         {
-          a: {a: {a: 1}, b: [1,2,4], c: new Date()}
+          a: {a: {a: 1}, b: [1,2,4], c: now}
         },
         {
           a: {d: new Boolean(true), e: new Number(1), f: new String('abc')}
@@ -57,7 +58,7 @@ var inout =
       ],
     out:
       {
-        a: {a: {a: 1}, b: [1,2,4], c: new Date(), d: new Boolean(true), e: new Number(1), f: new String('abc')}
+        a: {a: {a: 1}, b: [1,2,4], c: now, d: new Boolean(true), e: new Number(1), f: new String('abc')}
       }
   }
 
