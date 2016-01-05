@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint *.js test/*.js",
-    "test": "istanbul cover ./test"
+    "test": "istanbul cover ./test",
+    "browser": "browserify test/index.js | ghostface | tap-set-exit"
   },
   "pre-commit": [
     "lint",
@@ -37,9 +38,11 @@
     "codacy-coverage": "^1.1.3",
     "coveralls": "^2.11.6",
     "eslint": "^1.10.3",
+    "ghostface": "^1.5.0",
     "istanbul": "^0.4.1",
     "phantomjs": "^1.9.19",
     "pre-commit": "^1.1.2",
+    "tap-set-exit": "^1.1.1",
     "tape": "^4.4.0"
   }
 }
