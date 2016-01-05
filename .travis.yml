@@ -8,6 +8,8 @@ node_js:
   - "iojs"
   - "4.2"
   - "stable"
+before_install:
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install nvm; fi
 after_script:
   - "cat coverage/lcov.info | ./node_modules/.bin/coveralls"
   - "cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage"

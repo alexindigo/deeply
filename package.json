@@ -40,7 +40,6 @@
     "istanbul": "^0.4.1",
     "phantomjs": "^1.9.19",
     "pre-commit": "^1.1.2",
-    "tape": "^4.4.0",
-    "testem": "^0.9.11"
+    "tape": "^4.4.0"
   }
 }
