@@ -1,17 +1,19 @@
 language: node_js
-os:
-  - linux
-  - osx
 node_js:
   - "0.10"
   - "0.12"
   - "iojs"
   - "4.2"
   - "stable"
-before_install:
-  - echo HERE
-  - echo $TRAVIS_OS_NAME
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then npm install -g nvm; fi
+script:
+  - node --version
+  - npm --version
+  # linting
+  - npm run lint
+  # nodejs testing
+  - npm run test
+  # phantomjs testing
+  - npm run browser
 after_script:
   - "cat coverage/lcov.info | ./node_modules/.bin/coveralls"
   - "cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage"

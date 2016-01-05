@@ -1,7 +1,7 @@
 {
   "name": "deeply",
   "version": "1.0.0",
-  "description": "Deeply merges properties of the provided objects, returns untangled copy (clone)",
+  "description": "Universal (nodejs + browser) library that deeply merges properties of the provided objects, returns untangled copy (clone). Mutable operations also available.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint *.js test/*.js",

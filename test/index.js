@@ -1,6 +1,7 @@
 var test      = require('tape').test
   , merge     = require('../')
   , stringify = JSON.stringify
+  , withStuffOnPrototype
   ;
 
   // tests
@@ -92,19 +93,6 @@ var inout =
   ]
   ;
 
-// merge
-test('merge', function test_deep_merge(t)
-{
-  // planning to have 1 test per file
-  t.plan(inout.length);
-
-  inout.forEach(function(pair)
-  {
-    var res = merge.apply(this, pair.in.concat([pair.reduceArrays]));
-    t.deepEqual(stringify(res), stringify(pair.out), 'merged '+stringify(pair.in)+' into '+stringify(res)+', expected '+stringify(pair.out));
-  });
-});
-
 /**
  * Concats provided arrays into new one
  * creating shallow copy
@@ -129,3 +117,39 @@ function reduceArrays(a, b)
 
   return r.sort();
 }
+
+/**
+ * Example constructor to test
+ * properties on prototypes
+ *
+ * @constructor
+ */
+function someConstructor()
+{
+  this.localVar = 34;
+}
+someConstructor.prototype.shouldNotBeHere = '25';
+
+// Prepare test object
+withStuffOnPrototype = new someConstructor();
+withStuffOnPrototype.here = 'there';
+withStuffOnPrototype.boom = 'zoom';
+
+// add it to the test suite
+inout.push({
+  in: [withStuffOnPrototype],
+  out: {localVar: 34, here: 'there', boom: 'zoom'}
+});
+
+// Run tests
+test('merge', function test_deep_merge(t)
+{
+  // planning to have 1 test per file
+  t.plan(inout.length);
+
+  inout.forEach(function(pair)
+  {
+    var res = merge.apply(this, pair.in.concat([pair.reduceArrays]));
+    t.deepEqual(stringify(res), stringify(pair.out), 'merged '+stringify(pair.in)+' into '+stringify(res)+', expected '+stringify(pair.out));
+  });
+});
