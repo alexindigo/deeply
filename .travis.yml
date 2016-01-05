@@ -8,7 +8,7 @@ node_js:
   - "iojs"
   - "4.2"
   - "stable"
-before_build:
+before_install:
   - echo HERE
   - echo $TRAVIS_OS_NAME
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then npm install -g nvm; fi
