@@ -1,17 +1,19 @@
-# Deeply [![Build Status](https://travis-ci.org/alexindigo/deeply.png?branch=master)](https://travis-ci.org/alexindigo/deeply) [![Dependency Status](https://gemnasium.com/alexindigo/deeply.png)](https://gemnasium.com/alexindigo/deeply)
+# Deeply
 
 Javascript (Node + Browser) library that deeply merges properties of the provided objects, returns untangled copy (clone).
 
+[![Linux Build](https://img.shields.io/travis/alexindigo/deeply/master.svg?label=linux:0.10-5.x)](https://travis-ci.org/alexindigo/deeply)
+[![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/deeply/master.svg?label=windows:0.10-5.x)](https://ci.appveyor.com/project/alexindigo/deeply)
+[![Coverage Status](https://img.shields.io/coveralls/alexindigo/deeply/master.svg?label=code+coverage)](https://coveralls.io/github/alexindigo/deeply?branch=master)
+
+[![Dependency Status](https://img.shields.io/david/alexindigo/deeply.svg)](https://david-dm.org/alexindigo/deeply)
+[![Codacy Badge](https://img.shields.io/codacy/5f1289b78b7346498797f9f3cd674408.svg)](https://www.codacy.com/app/alexindigo/deeply)
+[![bitHound Overall Score](https://www.bithound.io/github/alexindigo/deeply/badges/score.svg)](https://www.bithound.io/github/alexindigo/deeply)
+
 ## Install
 
-### Node
 ```
-$ npm install deeply
-```
-
-### Ender
-```
-$ ender add deeply --use=your_ender_file
+$ npm install deeply --save
 ```
 
 ## Usage
@@ -19,22 +21,15 @@ $ ender add deeply --use=your_ender_file
 ### merge
 – Deeply merges two or more objects.
 
-Node:
 ``` javascript
 var merge = require('deeply');
 
 merge({a: {a1: 1}}, {a: {a2: 2}}); // -> {a: {a1: 1, a2: 2}}
 ```
 
-Ender:
-``` javascript
-$.merge({a: {a1: 1}}, {a: {a2: 2}}); // -> {a: {a1: 1, a2: 2}}
-```
-
 ### clone
 – As degenerated case of merging one object on itself, it's possible to use deeply as deep clone function.
 
-Node:
 ``` javascript
 var merge = require('deeply')
   , clone = merge
@@ -48,21 +43,9 @@ y.a.b.c = 2;
 console.log(x.a.b.c); // -> 1
 ```
 
-Ender:
-``` javascript
-var clone = $.merge;
-var x = {a: {b: {c: 1}}};
-var y = clone(x);
-
-y.a.b.c = 2;
-
-console.log(x.a.b.c); // -> 1
-```
-
 ### Arrays custom merging
 – By default array treated as primitive values and being replaced upon conflict, for more meaningful array merge strategy, provide custom reduce function as last argument.
 
-Node:
 ``` javascript
 var merge = require('deeply');
 
@@ -78,24 +61,6 @@ function customMerge(a, b)
 }
 
 merge({ a: { b: [0, 2, 4] }}, { a: {b: [1, 3, 5] }}, customMerge); // -> { a: { b: [0, 2, 4, 1, 3, 5] }}
-```
-
-Ender:
-``` javascript
-
-// default behavior
-
-$.merge({ a: { b: [0, 2, 4] }}, { a: {b: [1, 3, 5] }}); // -> { a: { b: [1, 3, 5] }}
-
-// custom merge function
-
-function customMerge(a, b)
-{
-  return (a||[]).concat(b);
-}
-
-$.merge({ a: { b: [0, 2, 4] }}, { a: {b: [1, 3, 5] }}, customMerge); // -> { a: { b: [0, 2, 4, 1, 3, 5] }}
-
 ```
 
 More examples can be found in ```test/index.js```.

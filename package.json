@@ -1,14 +1,13 @@
 {
   "name": "deeply",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Deeply merges properties of the provided objects, returns untangled copy (clone)",
-  "main": "deeply.js",
+  "main": "index.js",
   "scripts": {
     "test": "node ./test"
   },
-  "ender": "./ender.js",
   "engines": {
-    "node": ">= 0.8"
+    "node": ">= 0.10"
   },
   "repository": {
     "type": "git",
@@ -21,8 +20,7 @@
     "util",
     "browser",
     "client",
-    "server",
-    "ender"
+    "server"
   ],
   "author": "Alex Indigo <iam@alexindigo.com>",
   "license": "MIT",
@@ -32,12 +30,13 @@
   "testling": {
     "files": "test/*.js",
     "browsers": [
-      "ie/9",
+      "ie/9..latest",
       "chrome/latest",
       "firefox/latest",
       "safari/latest",
       "iphone/latest",
-      "ipad/latest"
+      "ipad/latest",
+      "android-browser/latest"
     ]
   },
   "devDependencies": {
