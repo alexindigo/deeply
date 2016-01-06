@@ -1,6 +1,7 @@
 var test      = require('tape').test
   , merge     = require('../')
-  , stringify = JSON.stringify
+  , partial   = require('lodash.partialright')
+  , stringify = partial(require('util').inspect, {depth: 4})
   , now    = new Date()
   , withStuffOnPrototype
   ;

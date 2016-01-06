@@ -14,6 +14,6 @@ script:
   - npm run test
   # phantomjs testing
   - npm run browser
-after_script:
+after_success:
   - "cat coverage/lcov.info | ./node_modules/.bin/coveralls"
   - "cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage"
