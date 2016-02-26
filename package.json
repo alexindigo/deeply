@@ -37,7 +37,7 @@
   "devDependencies": {
     "browserify": "^12.0.1",
     "codacy-coverage": "^1.1.3",
-    "coveralls": "^2.11.6",
+    "coveralls": "^2.11.8",
     "eslint": "^1.10.3",
     "ghostface": "^1.5.0",
     "lodash.partialright": "^4.0.1",
