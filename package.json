@@ -1,13 +1,14 @@
 {
   "name": "deeply",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Universal (nodejs + browser) library that deeply merges properties of the provided objects, returns untangled copy (clone). Mutable operations also available.",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint *.js test/*.js",
-    "test": "nyc --reporter=lcov --reporter=text tape ./test/*.js",
-    "posttest": "nyc check-coverage --lines 98 --functions 100 --branches 98",
-    "browser": "browserify test/compatability.js | ghostface | tap-set-exit"
+    "lint": "eslint *.js adapters/*.js test/*.js",
+    "test": "nyc --reporter=lcov --reporter=text tape test/*.js | tap-spec",
+    "posttest": "nyc check-coverage --lines 98 --functions 100 --branches 93",
+    "browser": "browserify test/compatability.js | ghostface | tap-spec",
+    "debug": "tape test/*.js | tap-spec"
   },
   "pre-commit": [
     "lint",
@@ -45,7 +46,10 @@
     "phantomjs": "^1.9.19",
     "pre-commit": "^1.1.2",
     "reamde": "^1.1.0",
-    "tap-set-exit": "^1.1.1",
+    "tap-spec": "^4.1.1",
     "tape": "^4.4.0"
+  },
+  "dependencies": {
+    "precise-typeof": "^1.0.0"
   }
 }

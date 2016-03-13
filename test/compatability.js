@@ -1,8 +1,8 @@
 var test      = require('tape').test
-  , merge     = require('../')
   , partial   = require('lodash.partialright')
-  , stringify = partial(require('util').inspect, {depth: 4})
-  , now    = new Date()
+  , deeply    = require('../')
+  , stringify = partial(require('util').inspect, {depth: 8})
+  , now       = new Date()
   , withStuffOnPrototype
   ;
 
@@ -75,50 +75,76 @@ var inout =
 
   // custom array merging
   , {
-    in: [ { a: { b: [0, 2, 4] }}, { a: {b: [1, 3, 5] }} ],
-    out: { a: { b: [0, 2, 4, 1, 3, 5] }},
-    // custom merge: combination
-    reduceArrays: function(a, b){ return (a||[]).concat(b); }
+    in: [ { a: { b: [0, {x: 'a'}, 4, {a: 1, b: 2}] }}, { a: {b: [1, 3, 5, {a: 10, c: 20}] }} ],
+    out: { a: { b: [0, {x: 'a'}, 4, {a: 1, b: 2}, 1, 3, 5, {a: 10, c: 20}] }},
+    // custom merge: append
+    customAdapters: {array: deeply.adapters.arraysAppend}
   }
   , {
-    in: [ { a: { b: [0, 2, 4, 4, 2, 0] }}, { a: { b: [1, 3, 5, 5, 3, 1] }} ],
-    out: { a: { b: [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5] }},
-    // custom merge: combination + sort
-    reduceArrays: function(a, b){ var r=(a||[]).concat(b); return r.sort(); }
+    in: [ { a: { b: [0, 2, 4, 2, {x: 'a'}] }}, { a: { b: [0, 1, 3, 4, 5, 5, 3, 1] }} ],
+    out: { a: { b: [0, 2, 4, { x: 'a' }, 1, 3, 5] }},
+    // custom merge: append + unique
+    customAdapters: {array: deeply.adapters.arrayAppendUnique}
+  }
+  , {
+    in: [ { a: { b: [0, {x: 'a'}, 4, {a: 1, b: 2}, 6] }}, { a: {b: [1, 3, 5, {a: 10, c: 20}] }} ],
+    out: { a: { b: [1, 3, 5, {a: 10, b: 2, c: 20}, 6] }},
+    // custom merge: append
+    customAdapters: {array: deeply.adapters.arraysCombine}
   }
   , {
     in: [ { a: { b: [0, 2, 4, 4, 2, 0] }}, { a: { b: [1, 3, 5, 5, 3, 1] }} ],
     out: { a: { b: [0, 1, 2, 3, 4, 5] }},
-    // custom merge: combination + sort + unique
-    reduceArrays: reduceArrays
+    // custom custom merge: append + unique + sort
+    customAdapters: {array: function appendUniqueAndSort(to, from, merge)
+    {
+      from.reduce(function(target, value)
+      {
+        // append only if new element isn't present yet
+        if (target.indexOf(value) == -1)
+        {
+          target.push(merge(undefined, value));
+        }
+
+        return target;
+      }, to);
+
+      return to.sort();
+    }}
   }
+
+  // array of objects
+  , {
+    in: [{a: [{b: 1}, {c: 2}]}],
+    out: {a: [{b: 1}, {c: 2}]},
+    // modify after merge to see they're independent
+    modify: function(a, b) { a.a[0].d = 3; b.a[1].e = 5; }
+  }
+
+  // nested array of objects
+  , {
+    in: [{a: [{b: [{b1: [{b11: null, b12: ['121', '122']}, {b13: []}]}, {b2: [{}, {b22: [{b221: [{b2211: '2211'}]}]}]}], c: [{c1: 25}, {c2: [{c21: {c211: '211'}}, {}]}], d: {e: 5}}]}],
+    out: {a: [{b: [{b1: [{b11: null, b12: ['121', '122']}, {b13: []}]}, {b2: [{}, {b22: [{b221: [{b2211: '2211'}]}]}]}], c: [{c1: 25}, {c2: [{c21: {c211: '211'}}, {}]}], d: {e: 5}}]},
+    modify: function(a, b) { a.a[0].b[0].b1[0].b12.push('567'); b.a[0].b[0].b1[0].b11 = '456'; }
+  }
+
+  // clone arrays
+  , {
+    in: [ [13, 'ABC', {x: {y: {z: ['5', 6]}}}, now] ],
+    out: [13, 'ABC', {x: {y: {z: ['5', 6]}}}, now],
+    modify: function(a, b) { a[2].x.y1 = 25; b[2].x.y1 = 74; }
+  }
+
+  // works with primitive values
+  , {in: [25], out: 25},
+  , {in: ['ABC'], out: 'ABC'}
+
+  // edge cases
+  , {in: ['ABC', 25, true], out: true}
+  , {in: [{a: 13}], out: {a: 13}}
+  , {in: [now], out: now}
   ]
   ;
-
-/**
- * Concats provided arrays into new one
- * creating shallow copy
- *
- * @param   {array} a - an array
- * @param   {array} b - an array
- * @returns {array} combined array
- */
-function reduceArrays(a, b)
-{
-  var r=[]
-    , n=(a||[]).concat(b)
-    ;
-
-  for (var i=0; i<n.length; i++)
-  {
-    if (r.indexOf(n[i]) == -1)
-    {
-      r.push(n[i]);
-    }
-  }
-
-  return r.sort();
-}
 
 /**
  * Example constructor to test
@@ -146,12 +172,31 @@ inout.push({
 // Run tests
 test('merge', function test_deep_merge(t)
 {
-  // planning to have 1 test per file
-  t.plan(inout.length);
-
   inout.forEach(function(pair)
   {
-    var res = merge.apply(this, pair.in.concat([pair.reduceArrays]));
+    var context = null;
+
+    // turn on customAdapters
+    if ('customAdapters' in pair)
+    {
+      context = pair.customAdapters;
+      context['useCustomAdapters'] = deeply.behaviors.useCustomAdapters;
+    }
+
+    // default - immutable
+
+    var res = deeply.apply(context, pair.in);
     t.deepEqual(stringify(res), stringify(pair.out), 'merged '+stringify(pair.in)+' into '+stringify(res)+', expected '+stringify(pair.out));
+
+    // custom modification check
+    if (pair.in.length == 1 && typeof pair.modify == 'function')
+    {
+      pair.modify(pair.in[0], res);
+      // check that object's don't equal after modification
+      t.notDeepEqual(stringify(res), stringify(pair.in[0]), 'modified '+stringify(pair.in[0])+' should not be equal to '+stringify(res));
+    }
   });
+
+  // done
+  t.end();
 });

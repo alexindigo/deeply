@@ -18,3 +18,5 @@ test_script:
   - npm --version
   - npm run test
 build: off
+matrix:
+  fast_finish: true

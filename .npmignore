@@ -10,3 +10,5 @@ appveyor.yml
 coverage/
 node_modules/
 test/
+
+*.log

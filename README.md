@@ -65,12 +65,13 @@ assert.deepEqual(clone, { a: { b: [1, 3, 5] }});
 ```javascript
 var merge = require('deeply');
 
-function customMerge(a, b)
+var context =
 {
-  return (a||[]).concat(b);
-}
+  useCustomAdapters: merge.behaviors.useCustomAdapters,
+  'array'          : merge.adapters.arraysAppend
+};
 
-var clone = merge({ a: { b: [0, 2, 4] }}, { a: {b: [1, 3, 5] }}, customMerge);
+var clone = merge.call(context, { a: { b: [0, 2, 4] }}, { a: {b: [1, 3, 5] }});
 
 assert.deepEqual(clone, { a: { b: [0, 2, 4, 1, 3, 5] }});
 ```

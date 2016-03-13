@@ -4,16 +4,16 @@ var mutable = require('./mutable.js');
 module.exports = immutable;
 
 /**
- * Creates untangled copy (deep clone) of the provided object,
- * and deeply merges properties of the rest of the provided objects.
+ * Creates untangled copy (deep clone) of the provided value,
+ * and deeply merges rest of the provided values.
  *
- * @param {...object} object - objects to merge/clone
- * @param {function} [reduceArrays] - reduce function for custom array merging
- * @returns {object} deep merged copy of all the provided objects
+ * @param {...mixed} value - value(s) to merge/clone
+ * @returns {mixed} - deep merged copy of all the provided values
  */
-function immutable(/* a[, b[, ...[, reduceArrays]]] */)
+function immutable(/* a[, b[, ...]] */)
 {
   // invoke mutable with new object as first argument
   var args = Array.prototype.slice.call(arguments, 0);
-  return mutable.apply(this, [{}].concat(args));
+  // use `undefined` as always-override value
+  return mutable.apply(this, [undefined].concat(args));
 }
