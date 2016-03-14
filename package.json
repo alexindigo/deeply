@@ -41,7 +41,7 @@
     "eslint": "^1.10.3",
     "ghostface": "^1.5.0",
     "lodash.partialright": "^4.0.1",
-    "nyc": "^5.3.0",
+    "nyc": "^6.1.1",
     "phantomjs": "^1.9.19",
     "pre-commit": "^1.1.2",
     "reamde": "^1.1.0",
