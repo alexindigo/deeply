@@ -131,11 +131,12 @@ var inout = [
     in: [ { a: { b: [0, {x: 'a'}, 4, function(a, b) { return a + b + 5; }] }}, { a: {b: [1, 3, 5, function testFunc(a, b, c){ return 100 - a - b - c; }] }} ],
     out: { a: { b: [0, {x: 'a'}, 4, function(a, b){ return a + b; }, 1, 3, 5, function testFunc(a, b, c){ return a + b + c; }] }},
     // custom merge: append
-    customAdapters: {function: deeply.adapters.functionsClone, array: deeply.adapters.arraysAppend}
+    customAdapters: {function: deeply.adapters.functionsClone, array: deeply.adapters.arraysAppend},
+    modify: function(a, b) { a[2].x.y1 = 25; b[2].x.y1 = 74; }
   }
 
   // works with primitive values
-  , {in: [25], out: 25},
+  , {in: [25], out: 25}
   , {in: ['ABC'], out: 'ABC'}
 
   // edge cases
