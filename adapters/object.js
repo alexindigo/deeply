@@ -1,3 +1,5 @@
+var reduceObject  = require('../lib/reduce_object.js');
+
 // Public API
 module.exports = objectAdapter;
 
@@ -14,15 +16,8 @@ module.exports = objectAdapter;
  */
 function objectAdapter(to, from, merge)
 {
-  // transfer actual values
-  Object.keys(from).reduce(function(target, key)
-  {
-    // in this case `target[index]` is undefined
-    // use `undefined` as always-override value
-    target[key] = merge(target[key], from[key]);
-
-    return target;
-  }, to);
+  // transfer source values
+  reduceObject(to, from, merge);
 
   return to;
 }

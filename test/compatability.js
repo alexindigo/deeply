@@ -7,8 +7,7 @@ var test      = require('tape').test
   ;
 
   // tests
-var inout =
-  [
+var inout = [
     {in: [{a: 1}, {b: 2}, {c: 3}], out: {a: 1, b: 2, c: 3} }
   , {in: [{a: 1}, {a: 2}, {a: 3}], out: {a: 3} }
   , {in: [{a: 1}, {a: 2}, {b: 3}], out: {a: 2, b: 3} }
@@ -143,8 +142,7 @@ var inout =
   , {in: ['ABC', 25, true], out: true}
   , {in: [{a: 13}], out: {a: 13}}
   , {in: [now], out: now}
-  ]
-  ;
+];
 
 /**
  * Example constructor to test

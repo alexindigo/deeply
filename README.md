@@ -150,6 +150,8 @@ function appendUniqueAndSort(to, from, merge)
 By default, functions copied as is to the result object,
 basically being treated as primitive values.
 
+#### clone functions
+
 You can use `functionsClone` adapter to achieve something like this:
 
 ```javascript
@@ -197,7 +199,9 @@ assert.equal(result.a.b.isCopy, true);
 assert.equal(subj(3, 4), result.a.b(3, 4));
 ```
 
-In case you  care about prototype objects, it will work too.
+#### and their prototype chain
+
+In case you care about prototype objects, it will work too.
 
 ```javascript
 var clone = require('deeply');
@@ -220,7 +224,7 @@ var context =
 var result = clone.call(context, { class: Subj });
 
 // cloned object function named Subj
-assert.equal(result, { class: function Subj(){} });
+assert.equal(result, { class: Subj });
 
 // has prototype properties
 assert.equal(result.class.prototype.A, 1);
@@ -246,9 +250,81 @@ assert.equal(s1.boom, s2.boom);
 // but reported instanceof isn't the same
 assert.equal(s1 instanceof Subj, true);
 assert.equal(s2 instanceof Subj, false);
-
 ```
 
+#### extend original's function prototype
+
+When having proper `instanceof` results matters,
+you can use `functionsExtend` helper.
+
+```javascript
+var clone = require('deeply');
+
+function Subj()
+{
+  this.boom = 'Zap!';
+  return this.boom;
+}
+
+Subj.customProp = 13;
+
+Subj.prototype.A = 1;
+
+Subj.prototype.B = {isB: 'true'};
+
+var context =
+{
+  useCustomAdapters: clone.behaviors.useCustomAdapters,
+  'function'       : clone.adapters.functionsExtend
+};
+
+var result = clone.call(context, { class: Subj });
+
+// cloned object function named Subj
+assert.equal(result, { class: Subj });
+
+// same signature
+assert.equal(Subj.name, result.class.name);
+assert.equal(Subj.length, result.class.length);
+
+assert.equal(Subj.customProp, result.class.customProp);
+
+// separate objects
+Subj.isOriginal = true;
+result.class.isCopy = true;
+
+assert.equal(Subj.isOriginal, true);
+assert.equal(Subj.isCopy, undefined);
+
+assert.equal(result.class.isOriginal, undefined);
+assert.equal(result.class.isCopy, true);
+
+// same output
+assert.equal(Subj(), result.class());
+
+// has prototype properties
+assert.equal(result.class.prototype.A, 1);
+assert.equal(result.class.prototype.B.isB, 'true');
+
+// prototypes are extended
+Subj.prototype.X = 67;
+assert.equal(Subj.prototype.X, 67);
+assert.equal(result.class.prototype.X, 67);
+
+// instances  
+var s1 = new Subj();
+var s2 = new result.class();
+
+assert.equal(s1.A, s2.A);
+assert.equal(s1.B, s2.B);
+
+assert.equal(s1.boom, s2.boom);
+
+// but reported instanceof isn't the same
+assert.equal(s1 instanceof Subj, true);
+assert.equal(s2 instanceof Subj, true);
+
+```
 
 ### mutable operations
 
