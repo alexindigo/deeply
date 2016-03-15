@@ -71,8 +71,8 @@ function getTypeAdapter(type)
 function getInitialValue(type, adapter)
 {
   var value
-      // should be either `global` or `window`
-    , glob       = typeof global == 'object' ? global : window
+      // should be either `window` or `global`
+    , glob       = typeof window == 'object' ? window : global
       // capitalize the first letter to make object constructor
     , objectType = type[0].toUpperCase() + type.substr(1)
     ;

@@ -10,10 +10,10 @@ script:
   - npm --version
   # linting
   - npm run lint
-  # nodejs testing
+  # testing
+  - npm run clean
   - npm run test
-  # phantomjs testing
   - npm run browser
+  - npm run report
 after_success:
   - "cat coverage/lcov.info | ./node_modules/.bin/coveralls"
-  - "cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage"

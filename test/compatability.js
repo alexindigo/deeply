@@ -15,52 +15,45 @@ var inout =
 
   // nested
   , {
-    in:
-      [
-        {
-          a:
-            {
-              a1: {a11: 1, a12: 2, a13: 3},
-              a2: {a21: 'a', a22: 'b', a23: 'c'},
-              a3: {a31: function(){}, a32: null, a33: false, a34: true, a35: undefined, a36: Infinity, a37: NaN}
-            },
-          b: -Infinity
-        },
-        {
-          a:
-            {
-              a4: {a31: function(){}, a32: null, a33: false, a34: true, a35: undefined, a36: Infinity, a37: NaN}
-            }
-        }
-      ],
-    out:
+    in: [
       {
-        a:
-          {
-            a1: {a11: 1, a12: 2, a13: 3},
-            a2: {a21: 'a', a22: 'b', a23: 'c'},
-            a3: {a31: function(){}, a32: null, a33: false, a34: true, a35: undefined, a36: Infinity, a37: NaN},
-            a4: {a31: function(){}, a32: null, a33: false, a34: true, a35: undefined, a36: Infinity, a37: NaN}
-          },
+        a: {
+          a1: {a11: 1, a12: 2, a13: 3},
+          a2: {a21: 'a', a22: 'b', a23: 'c'},
+          a3: {a31: function(){}, a32: null, a33: false, a34: true, a35: undefined, a36: Infinity, a37: NaN}
+        },
         b: -Infinity
+      },
+      {
+        a: {
+          a4: {a31: function(){}, a32: null, a33: false, a34: true, a35: undefined, a36: Infinity, a37: NaN}
+        }
       }
+    ],
+    out: {
+      a: {
+        a1: {a11: 1, a12: 2, a13: 3},
+        a2: {a21: 'a', a22: 'b', a23: 'c'},
+        a3: {a31: function(){}, a32: null, a33: false, a34: true, a35: undefined, a36: Infinity, a37: NaN},
+        a4: {a31: function(){}, a32: null, a33: false, a34: true, a35: undefined, a36: Infinity, a37: NaN}
+      },
+      b: -Infinity
+    }
   }
 
   // objects
   , {
-    in:
-      [
-        {
-          a: {a: {a: 1}, b: [1,2,4], c: now}
-        },
-        {
-          a: {d: new Boolean(true), e: new Number(1), f: new String('abc')}
-        }
-      ],
-    out:
+    in: [
       {
-        a: {a: {a: 1}, b: [1,2,4], c: now, d: new Boolean(true), e: new Number(1), f: new String('abc')}
+        a: {a: {a: 1}, b: [1,2,4], c: now}
+      },
+      {
+        a: {d: new Boolean(true), e: new Number(1), f: new String('abc')}
       }
+    ],
+    out: {
+      a: {a: {a: 1}, b: [1,2,4], c: now, d: new Boolean(true), e: new Number(1), f: new String('abc')}
+    }
   }
 
   // default array merging: replacement
@@ -84,12 +77,12 @@ var inout =
     in: [ { a: { b: [0, 2, 4, 2, {x: 'a'}] }}, { a: { b: [0, 1, 3, 4, 5, 5, 3, 1] }} ],
     out: { a: { b: [0, 2, 4, { x: 'a' }, 1, 3, 5] }},
     // custom merge: append + unique
-    customAdapters: {array: deeply.adapters.arrayAppendUnique}
+    customAdapters: {array: deeply.adapters.arraysAppendUnique}
   }
   , {
     in: [ { a: { b: [0, {x: 'a'}, 4, {a: 1, b: 2}, 6] }}, { a: {b: [1, 3, 5, {a: 10, c: 20}] }} ],
     out: { a: { b: [1, 3, 5, {a: 10, b: 2, c: 20}, 6] }},
-    // custom merge: append
+    // custom merge: combine
     customAdapters: {array: deeply.adapters.arraysCombine}
   }
   , {
@@ -98,17 +91,16 @@ var inout =
     // custom custom merge: append + unique + sort
     customAdapters: {array: function appendUniqueAndSort(to, from, merge)
     {
-      from.reduce(function(target, value)
+      from.forEach(function(value)
       {
         // append only if new element isn't present yet
-        if (target.indexOf(value) == -1)
+        if (to.indexOf(value) == -1)
         {
-          target.push(merge(undefined, value));
+          to.push(merge(undefined, value));
         }
+      });
 
-        return target;
-      }, to);
-
+      // and sort
       return to.sort();
     }}
   }
@@ -133,6 +125,14 @@ var inout =
     in: [ [13, 'ABC', {x: {y: {z: ['5', 6]}}}, now] ],
     out: [13, 'ABC', {x: {y: {z: ['5', 6]}}}, now],
     modify: function(a, b) { a[2].x.y1 = 25; b[2].x.y1 = 74; }
+  }
+
+  // clone functions
+  , {
+    in: [ { a: { b: [0, {x: 'a'}, 4, function(a, b) { return a + b + 5; }] }}, { a: {b: [1, 3, 5, function testFunc(a, b, c){ return 100 - a - b - c; }] }} ],
+    out: { a: { b: [0, {x: 'a'}, 4, function(a, b){ return a + b; }, 1, 3, 5, function testFunc(a, b, c){ return a + b + c; }] }},
+    // custom merge: append
+    customAdapters: {function: deeply.adapters.functionsClone, array: deeply.adapters.arraysAppend}
   }
 
   // works with primitive values

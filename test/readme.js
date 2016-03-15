@@ -5,7 +5,7 @@ var fs        = require('fs')
   , reamde    = require('reamde')
   , partial   = require('lodash.partialright')
   , content   = fs.readFileSync(path.join(__dirname, '../README.md'), 'utf-8')
-  , stringify = partial(require('util').inspect, {depth: 4})
+  , stringify = partial(require('util').inspect, {depth: 8})
   , examples
   ;
 
@@ -18,20 +18,20 @@ examples = reamde(content, {
   {
     'require(\'deeply\')'         : deeply,
     'require(\'deeply/mutable\')' : deeply.mutable,
-    'assert.deepEqual('           : 'callback('
+    'assert.equal('               : 'callback('
   }
 });
 
 // Run tests
-test('readme', function test_readme_exampless(t)
+test('readme', function test_readme_examples(t)
 {
-  t.plan(examples.length);
-
   examples.forEach(function(ex)
   {
     ex(function(actual, expected)
     {
-      t.deepEqual(actual, expected, 'actual '+stringify(actual)+', expected '+stringify(expected));
+      t.deepEqual(stringify(actual), stringify(expected), 'actual ' + stringify(actual) + ', expected ' + stringify(expected));
     });
   });
+
+  t.end();
 });

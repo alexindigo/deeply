@@ -5,8 +5,9 @@ module.exports =
   'date'  : require('./adapters/date.js'),
   'object': require('./adapters/object.js'),
 
-  // optional adapters
-  arraysCombine    : require('./adapters/array_combine.js'),
-  arraysAppend     : require('./adapters/array_append.js'),
-  arrayAppendUnique: require('./adapters/array_append_unique.js')
+  // extra adapters
+  arraysCombine     : require('./extra/arrays_combine.js'),
+  arraysAppend      : require('./extra/arrays_append.js'),
+  arraysAppendUnique: require('./extra/arrays_append_unique.js'),
+  functionsClone    : require('./extra/functions_clone.js')
 };

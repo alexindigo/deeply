@@ -1,18 +1,24 @@
 {
   "name": "deeply",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Universal (nodejs + browser) library that deeply merges properties of the provided objects, returns untangled copy (clone). Mutable operations also available.",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf coverage",
     "lint": "eslint *.js adapters/*.js test/*.js",
-    "test": "nyc --reporter=lcov --reporter=text tape test/*.js | tap-spec",
-    "posttest": "nyc check-coverage --lines 98 --functions 100 --branches 93",
-    "browser": "browserify test/compatability.js | ghostface | tap-spec",
+    "test": "nyc --reporter=json tape test/*.js | tap-spec",
+    "browser": "browserify -t browserify-istanbul test/compatability.js | obake --coverage | tap-spec",
+    "report": "istanbul report",
+    "files": "pkgfiles --sort=name",
     "debug": "tape test/*.js | tap-spec"
   },
   "pre-commit": [
     "lint",
-    "test"
+    "clean",
+    "test",
+    "browser",
+    "report",
+    "files"
   ],
   "engines": {
     "node": ">= 0.10"
@@ -36,18 +42,20 @@
     "url": "https://github.com/alexindigo/deeply/issues"
   },
   "devDependencies": {
-    "browserify": "^12.0.1",
-    "codacy-coverage": "^1.1.3",
-    "coveralls": "^2.11.6",
-    "eslint": "^1.10.3",
-    "ghostface": "^1.5.0",
-    "lodash.partialright": "^4.0.1",
-    "nyc": "^5.3.0",
-    "phantomjs": "^1.9.19",
+    "browserify": "^13.0.0",
+    "browserify-istanbul": "^1.0.0",
+    "coveralls": "^2.11.8",
+    "eslint": "^2.4.0",
+    "istanbul": "^0.4.2",
+    "lodash.partialright": "^4.1.2",
+    "nyc": "^6.1.1",
+    "obake": "^0.1.2",
+    "phantomjs-prebuilt": "^2.1.5",
     "pre-commit": "^1.1.2",
     "reamde": "^1.1.0",
+    "rimraf": "^2.5.2",
     "tap-spec": "^4.1.1",
-    "tape": "^4.4.0"
+    "tape": "^4.5.1"
   },
   "dependencies": {
     "precise-typeof": "^1.0.0"
