@@ -361,7 +361,7 @@ assert.equal(s2 instanceof Subj, true);
 
 As shown in [Custom Merge Function](#custom-merge-function) example,
 you can add custom adapters for any data type
-that supported by [precise-typeof](https://www.npmjs.com/precise-typeof)).
+that supported by [precise-typeof](https://www.npmjs.com/precise-typeof).
 
 For this example we will combine arrays of number,
 by performing addition operation on array elements.
