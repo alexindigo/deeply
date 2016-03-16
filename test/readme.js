@@ -2,6 +2,7 @@ var fs        = require('fs')
   , path      = require('path')
   , test      = require('tape').test
   , deeply    = require('../')
+  , ludicrous = require('../ludicrous.js')
   , reamde    = require('reamde')
   , partial   = require('lodash.partialright')
   , content   = fs.readFileSync(path.join(__dirname, '../README.md'), 'utf-8')
@@ -16,9 +17,10 @@ examples = reamde(content, {
   ],
   replace:
   {
-    'require(\'deeply\')'         : deeply,
-    'require(\'deeply/mutable\')' : deeply.mutable,
-    'assert.equal('               : 'callback('
+    'require(\'deeply\')'           : deeply,
+    'require(\'deeply/mutable\')'   : deeply.mutable,
+    'require(\'deeply/ludicrous\')' : ludicrous,
+    'assert.equal('                 : 'callback('
   }
 });
 

@@ -1,7 +1,7 @@
 {
   "name": "deeply",
   "version": "2.0.0",
-  "description": "Universal (nodejs + browser) library that deeply merges properties of the provided objects, returns untangled copy (clone). Mutable operations also available.",
+  "description": "A toolkit for deep structure manipulations, provides deep merge/clone functionality out of the box, and exposes hooks and custom adapters for more control and greater flexibility.",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf coverage",
@@ -9,15 +9,19 @@
     "test": "nyc --reporter=json tape test/*.js | tap-spec",
     "browser": "browserify -t browserify-istanbul test/compatability.js | obake --coverage | tap-spec",
     "report": "istanbul report",
+    "size": "browserify index.js | size-table deeply",
+    "toc": "toc-md README.md",
     "files": "pkgfiles --sort=name",
     "debug": "tape test/*.js | tap-spec"
   },
   "pre-commit": [
-    "lint",
     "clean",
+    "lint",
     "test",
     "browser",
     "report",
+    "size",
+    "toc",
     "files"
   ],
   "engines": {
@@ -31,7 +35,14 @@
     "merge",
     "deep",
     "clone",
+    "mutable",
+    "immutable",
+    "object",
+    "array",
+    "function",
+    "prototype",
     "util",
+    "hook",
     "browser",
     "client",
     "server"
@@ -54,8 +65,10 @@
     "pre-commit": "^1.1.2",
     "reamde": "^1.1.0",
     "rimraf": "^2.5.2",
+    "size-table": "^0.2.0",
     "tap-spec": "^4.1.1",
-    "tape": "^4.5.1"
+    "tape": "^4.5.1",
+    "toc-md": "^0.1.0"
   },
   "dependencies": {
     "precise-typeof": "^1.0.0"
