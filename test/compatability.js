@@ -129,10 +129,18 @@ var inout = [
   // clone functions
   , {
     in: [ { a: { b: [0, {x: 'a'}, 4, function(a, b) { return a + b + 5; }] }}, { a: {b: [1, 3, 5, function testFunc(a, b, c){ return 100 - a - b - c; }] }} ],
-    out: { a: { b: [0, {x: 'a'}, 4, function(a, b){ return a + b; }, 1, 3, 5, function testFunc(a, b, c){ return a + b + c; }] }},
+    out: { a: { b: [0, {x: 'a'}, 4, function(a, b){ return a + b + 5; }, 1, 3, 5, function testFunc(a, b, c){ return 100 - a - b - c; }] }},
     // custom merge: append
-    customAdapters: {function: deeply.adapters.functionsClone, array: deeply.adapters.arraysAppend},
-    modify: function(a, b) { a[2].x.y1 = 25; b[2].x.y1 = 74; }
+    customAdapters: {function: deeply.adapters.functionsClone, array: deeply.adapters.arraysAppend}
+  }
+
+  // make sure they're different
+  , {
+    in: [ { a: { b: [0, {x: 'a'}, 4, function(a, b) { return a + b + 5; }] }} ],
+    out: { a: { b: [0, {x: 'a'}, 4, function(a, b){ return a + b + 5; }] }},
+    // custom merge: append
+    customAdapters: {function: deeply.adapters.functionsClone},
+    modify: function(a, b) { a.a.b[3].isOriginal = 'original'; b.a.b[3].isClone = 'clone'; }
   }
 
   // works with primitive values

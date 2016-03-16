@@ -71,6 +71,6 @@
     "toc-md": "^0.1.0"
   },
   "dependencies": {
-    "precise-typeof": "^1.0.0"
+    "precise-typeof": "^1.0.2"
   }
 }

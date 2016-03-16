@@ -11,7 +11,7 @@ and exposes hooks and custom adapters for more control and greater flexibility.
 [![Dependency Status](https://img.shields.io/david/alexindigo/deeply.svg?style=flat)](https://david-dm.org/alexindigo/deeply)
 [![bitHound Overall Score](https://www.bithound.io/github/alexindigo/deeply/badges/score.svg)](https://www.bithound.io/github/alexindigo/deeply)
 
-![Readme](https://img.shields.io/badge/readme-tested-brightgreen.svg?style=flat)
+[![Readme](https://img.shields.io/badge/readme-tested-brightgreen.svg?style=flat)](https://www.npmjs.com/package/reamde)
 
 | compression      |    size |
 | :--------------- | ------: |
