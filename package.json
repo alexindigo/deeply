@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf coverage",
     "lint": "eslint *.js adapters/*.js test/*.js",
-    "test": "nyc --reporter=json tape test/*.js | tap-spec",
+    "test": "istanbul cover --reporter=json tape -- 'test/*.js' | tap-spec",
     "browser": "browserify -t browserify-istanbul test/compatability.js | obake --coverage | tap-spec",
     "report": "istanbul report",
     "size": "browserify index.js | size-table deeply",
@@ -59,7 +59,6 @@
     "eslint": "^2.9.0",
     "istanbul": "^0.4.3",
     "lodash.partialright": "^4.1.3",
-    "nyc": "^6.4.2",
     "obake": "^0.1.2",
     "phantomjs-prebuilt": "^2.1.7",
     "pre-commit": "^1.1.2",
