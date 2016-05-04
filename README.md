@@ -4,8 +4,8 @@ A toolkit for deep structure manipulations, provides deep merge/clone functional
 and exposes hooks and custom adapters for more control and greater flexibility.
 
 [![PhantomJS Build](https://img.shields.io/travis/alexindigo/deeply/master.svg?label=browser&style=flat)](https://travis-ci.org/alexindigo/deeply)
-[![Linux Build](https://img.shields.io/travis/alexindigo/deeply/master.svg?label=linux:0.10-5.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
-[![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/deeply/master.svg?label=windows:0.10-5.x&style=flat)](https://ci.appveyor.com/project/alexindigo/deeply)
+[![Linux Build](https://img.shields.io/travis/alexindigo/deeply/master.svg?label=linux:0.10-6.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
+[![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/deeply/master.svg?label=windows:0.10-6.x&style=flat)](https://ci.appveyor.com/project/alexindigo/deeply)
 
 [![Coverage Status](https://img.shields.io/coveralls/alexindigo/deeply/master.svg?label=code+coverage&style=flat)](https://coveralls.io/github/alexindigo/deeply?branch=master)
 [![Dependency Status](https://img.shields.io/david/alexindigo/deeply.svg?style=flat)](https://david-dm.org/alexindigo/deeply)
