@@ -147,6 +147,10 @@ var inout = [
   , {in: [25], out: 25}
   , {in: ['ABC'], out: 'ABC'}
 
+  // handles falsy values
+  , {in: [{a: 25}, null, {b: 13}], out: {b: 13}}
+  , {in: [{a: 4, b: 5, c: 6, d: 7}, {a: 11, b: null, c: 13, e: 15}], out: {a: 11, b: null, c: 13, d: 7, e: 15}}
+
   // edge cases
   , {in: ['ABC', 25, true], out: true}
   , {in: [{a: 13}], out: {a: 13}}

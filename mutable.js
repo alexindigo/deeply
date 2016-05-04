@@ -11,14 +11,13 @@ module.exports = mutable;
  */
 function mutable(/* a[, b[, ...]] */)
 {
-  var source
-    , args   = Array.prototype.slice.call(arguments)
+  var args   = Array.prototype.slice.call(arguments)
     , result = args.shift()
     ;
 
-  while ((source = args.shift()))
+  while (args.length)
   {
-    result = merge.call(this, result, source);
+    result = merge.call(this, result, args.shift());
   }
 
   return result;
