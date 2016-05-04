@@ -67,7 +67,7 @@
     "size-table": "^0.2.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1",
-    "toc-md": "^0.1.0"
+    "toc-md": "^0.2.0"
   },
   "dependencies": {
     "precise-typeof": "^1.0.2"
