@@ -17,8 +17,7 @@ install:
 test_script:
   - node --version
   - npm --version
-  - node test/compatibility.js
-  - node test/readme.js
+  - npm run test
 build: off
 matrix:
   fast_finish: true

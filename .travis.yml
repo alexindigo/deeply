@@ -5,7 +5,7 @@ node_js:
   - "iojs"
   - "4"
   - "5"
-  - "stable"
+  - "6"
 script:
   - node --version
   - npm --version
@@ -13,7 +13,7 @@ script:
   - npm run lint
   # testing
   - npm run clean
-  - npm run test
+  - npm run cover
   - npm run browser
   - npm run report
 after_success:
