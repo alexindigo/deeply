@@ -6,8 +6,8 @@
   "scripts": {
     "clean": "rimraf coverage",
     "lint": "eslint *.js adapters/*.js test/*.js",
-    "test": "tape 'test/*.js' | tap-spec",
-    "cover": "istanbul cover --reporter=json tape -- 'test/*.js' | tap-spec",
+    "test": "tape test/*.js | tap-spec",
+    "cover": "istanbul cover --reporter=json tape -- test/*.js | tap-spec",
     "browser": "browserify -t browserify-istanbul test/compatibility.js | obake --coverage | tap-spec",
     "report": "istanbul report lcov text",
     "size": "browserify index.js | size-table deeply",

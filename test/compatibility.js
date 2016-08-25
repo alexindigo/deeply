@@ -183,6 +183,13 @@ inout.push({
 // Run tests
 test('merge', function test_deep_merge(t)
 {
+  var expectedTestsNum = inout.length;
+
+  // extra sub tests
+  expectedTestsNum += inout.filter(function(pair){ return pair.in.length == 1 && typeof pair.modify == 'function'; }).length;
+
+  t.plan(expectedTestsNum);
+
   inout.forEach(function(pair)
   {
     var context = null;
@@ -207,7 +214,4 @@ test('merge', function test_deep_merge(t)
       t.notDeepEqual(stringify(res), stringify(pair.in[0]), 'modified '+stringify(pair.in[0])+' should not be equal to '+stringify(res));
     }
   });
-
-  // done
-  t.end();
 });
