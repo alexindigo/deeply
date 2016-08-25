@@ -13,11 +13,11 @@ and exposes hooks and custom adapters for more control and greater flexibility.
 
 [![Readme](https://img.shields.io/badge/readme-tested-brightgreen.svg?style=flat)](https://www.npmjs.com/package/reamde)
 
-| compression      |     size |
-| :--------------- | -------: |
-| deeply.js        | 15.18 kB |
-| deeply.min.js    |  5.06 kB |
-| deeply.min.js.gz |   1.5 kB |
+| compression      |    size |
+| :--------------- | ------: |
+| deeply.js        | 15.1 kB |
+| deeply.min.js    | 4.98 kB |
+| deeply.min.js.gz | 1.51 kB |
 
 
 ## Table of Contents
@@ -452,4 +452,4 @@ Or open an [issue](https://github.com/alexindigo/deeply/issues) with questions a
 
 ## License
 
-Deeply is licensed under the MIT license.
+Deeply is released under the [MIT](LICENSE) license.

@@ -1,4 +1,4 @@
-var cloneFunction = require('../lib/clone_function.js')
+var cloneFunction = require('fulcon')
   , reduceObject  = require('../lib/reduce_object.js')
   ;
 
