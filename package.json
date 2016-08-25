@@ -1,6 +1,6 @@
 {
   "name": "deeply",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A toolkit for deep structure manipulations, provides deep merge/clone functionality out of the box, and exposes hooks and custom adapters for more control and greater flexibility.",
   "main": "index.js",
   "scripts": {
