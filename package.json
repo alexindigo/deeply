@@ -57,7 +57,7 @@
     "browserify": "^13.1.0",
     "browserify-istanbul": "^2.0.0",
     "coveralls": "^2.11.12",
-    "eslint": "^2.13.1",
+    "eslint": "^3.16.0",
     "istanbul": "^0.4.5",
     "lodash.partialright": "^4.2.1",
     "obake": "^0.1.2",
