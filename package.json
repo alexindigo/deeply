@@ -54,7 +54,7 @@
     "url": "https://github.com/alexindigo/deeply/issues"
   },
   "devDependencies": {
-    "browserify": "^13.1.0",
+    "browserify": "^14.2.0",
     "browserify-istanbul": "^2.0.0",
     "coveralls": "^2.11.12",
     "eslint": "^2.13.1",
