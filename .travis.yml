@@ -20,7 +20,7 @@ script:
   - npm run lint
   # testing
   - npm run clean
-  - npm run cover
+  - npm run test
   - npm run browser
   - npm run report
 after_success:
