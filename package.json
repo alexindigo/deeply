@@ -12,8 +12,8 @@
     "report": "istanbul report lcov text",
     "size": "browserify index.js | size-table deeply",
     "toc": "toc-md README.md",
-    "files": "pkgfiles --sort=name",
-    "debug": "tape test/*.js | tap-spec"
+    "debug": "tape test/*.js | tap-spec",
+    "testall": "npm run test && npm run browser && npm run report"
   },
   "pre-commit": [
     "clean",
@@ -22,8 +22,7 @@
     "browser",
     "report",
     "size",
-    "toc",
-    "files"
+    "toc"
   ],
   "engines": {
     "node": ">= 0.10"

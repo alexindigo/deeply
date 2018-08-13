@@ -13,11 +13,11 @@ and exposes hooks and custom adapters for more control and greater flexibility.
 
 [![Readme](https://img.shields.io/badge/readme-tested-brightgreen.svg?style=flat)](https://www.npmjs.com/package/reamde)
 
-| compression      |    size |
-| :--------------- | ------: |
-| deeply.js        | 15.1 kB |
-| deeply.min.js    | 4.98 kB |
-| deeply.min.js.gz | 1.51 kB |
+| compression      |     size |
+| :--------------- | -------: |
+| deeply.js        | 15.45 kB |
+| deeply.min.js    |  5.14 kB |
+| deeply.min.js.gz |  1.51 kB |
 
 
 ## Table of Contents
