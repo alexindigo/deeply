@@ -52,8 +52,8 @@ function getTypeAdapter(type)
   // only if usage of custom adapters is authorized
   // to prevent global context leaking in
   if (this.useCustomAdapters === behaviors.useCustomAdapters
-    && typeof this[type] == 'function'
-    )
+  && typeof this[type] == 'function'
+  )
   {
     adapter = this[type];
   }
@@ -71,9 +71,9 @@ function getTypeAdapter(type)
 function getInitialValue(type, adapter)
 {
   var value
-      // should be either `window` or `global`
+    // should be either `window` or `global`
     , glob       = typeof window == 'object' ? window : global
-      // capitalize the first letter to make object constructor
+    // capitalize the first letter to make object constructor
     , objectType = type[0].toUpperCase() + type.substr(1)
     ;
 

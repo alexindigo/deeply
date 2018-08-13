@@ -1,11 +1,4 @@
-.DS_Store
-.editorconfig
-.eslintrc
-.gitignore
-.istanbul.yml
-.npmignore
-.nyc_output/
-.travis.yml
+.*
 appveyor.yml
 coverage/
 node_modules/

@@ -3,21 +3,22 @@
 A toolkit for deep structure manipulations, provides deep merge/clone functionality out of the box,
 and exposes hooks and custom adapters for more control and greater flexibility.
 
-[![PhantomJS Build](https://img.shields.io/travis/alexindigo/deeply/master.svg?label=browser&style=flat)](https://travis-ci.org/alexindigo/deeply)
-[![Linux Build](https://img.shields.io/travis/alexindigo/deeply/master.svg?label=linux:0.10-6.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
-[![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/deeply/master.svg?label=windows:0.10-6.x&style=flat)](https://ci.appveyor.com/project/alexindigo/deeply)
+[![PhantomJS Build](https://img.shields.io/travis/alexindigo/deeply/canary.svg?label=browser&style=flat)](https://travis-ci.org/alexindigo/deeply)
+[![Linux Build](https://img.shields.io/travis/alexindigo/deeply/canary.svg?label=linux:0.10-6.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
+[![MacOS Build](https://img.shields.io/travis/alexindigo/deeply/canary.svg?label=macos:0.10-6.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
+[![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/deeply/canary.svg?label=windows:0.10-6.x&style=flat)](https://ci.appveyor.com/project/alexindigo/deeply)
 
-[![Coverage Status](https://img.shields.io/coveralls/alexindigo/deeply/master.svg?label=code+coverage&style=flat)](https://coveralls.io/github/alexindigo/deeply?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/alexindigo/deeply/canary.svg?label=code+coverage&style=flat)](https://coveralls.io/github/alexindigo/deeply?branch=canary)
 [![Dependency Status](https://img.shields.io/david/alexindigo/deeply.svg?style=flat)](https://david-dm.org/alexindigo/deeply)
-[![bitHound Overall Score](https://www.bithound.io/github/alexindigo/deeply/badges/score.svg)](https://www.bithound.io/github/alexindigo/deeply)
+[![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://opensource.org/licenses/MIT)
 
 [![Readme](https://img.shields.io/badge/readme-tested-brightgreen.svg?style=flat)](https://www.npmjs.com/package/reamde)
 
 | compression      |     size |
 | :--------------- | -------: |
-| deeply.js        | 15.45 kB |
-| deeply.min.js    |  5.14 kB |
-| deeply.min.js.gz |  1.51 kB |
+| deeply.js        | 15.08 kB |
+| deeply.min.js    |  4.95 kB |
+| deeply.min.js.gz |  1.48 kB |
 
 
 ## Table of Contents
@@ -267,7 +268,7 @@ Subj.prototype.C = 2;
 assert.equal(Subj.prototype.C, 2);
 assert.equal(result.class.prototype.C, undefined);
 
-// instances  
+// instances
 var s1 = new Subj();
 var s2 = new result.class();
 
@@ -343,7 +344,7 @@ Subj.prototype.X = 67;
 assert.equal(Subj.prototype.X, 67);
 assert.equal(result.class.prototype.X, 67);
 
-// instances  
+// instances
 var s1 = new Subj();
 var s2 = new result.class();
 

@@ -1,12 +1,19 @@
 language: node_js
+
 node_js:
-  - "0.10"
-  - "0.12"
-  - "iojs"
-  - "4"
-  - "5"
   - "6"
+  - "8"
+  - "10"
+
+os:
+  - osx
+  - linux
+
+install:
+  - travis_retry yarn install
+
 script:
+  - uname -a
   - node --version
   - npm --version
   # linting

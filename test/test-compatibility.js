@@ -6,9 +6,9 @@ var test      = require('tape').test
   , withStuffOnPrototype
   ;
 
-  // tests
+// tests
 var inout = [
-    {in: [{a: 1}, {b: 2}, {c: 3}], out: {a: 1, b: 2, c: 3} }
+  {in: [{a: 1}, {b: 2}, {c: 3}], out: {a: 1, b: 2, c: 3} }
   , {in: [{a: 1}, {a: 2}, {a: 3}], out: {a: 3} }
   , {in: [{a: 1}, {a: 2}, {b: 3}], out: {a: 2, b: 3} }
 
