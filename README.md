@@ -3,12 +3,12 @@
 A toolkit for deep structure manipulations, provides deep merge/clone functionality out of the box,
 and exposes hooks and custom adapters for more control and greater flexibility.
 
-[![PhantomJS Build](https://img.shields.io/travis/alexindigo/deeply/canary.svg?label=browser&style=flat)](https://travis-ci.org/alexindigo/deeply)
-[![Linux Build](https://img.shields.io/travis/alexindigo/deeply/canary.svg?label=linux:6.x-11.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
-[![MacOS Build](https://img.shields.io/travis/alexindigo/deeply/canary.svg?label=macos:6.x-11.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
-[![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/deeply/canary.svg?label=windows:6.x-11.x&style=flat)](https://ci.appveyor.com/project/alexindigo/deeply)
+[![PhantomJS Build](https://img.shields.io/travis/alexindigo/deeply/master.svg?label=browser&style=flat)](https://travis-ci.org/alexindigo/deeply)
+[![Linux Build](https://img.shields.io/travis/alexindigo/deeply/master.svg?label=linux:6.x-11.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
+[![MacOS Build](https://img.shields.io/travis/alexindigo/deeply/master.svg?label=macos:6.x-11.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
+[![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/deeply/master.svg?label=windows:6.x-11.x&style=flat)](https://ci.appveyor.com/project/alexindigo/deeply)
 
-[![Coverage Status](https://img.shields.io/coveralls/alexindigo/deeply/canary.svg?label=code+coverage&style=flat)](https://coveralls.io/github/alexindigo/deeply?branch=canary)
+[![Coverage Status](https://img.shields.io/coveralls/alexindigo/deeply/master.svg?label=code+coverage&style=flat)](https://coveralls.io/github/alexindigo/deeply?branch=master)
 [![Dependency Status](https://img.shields.io/david/alexindigo/deeply.svg?style=flat)](https://david-dm.org/alexindigo/deeply)
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://opensource.org/licenses/MIT)
 
