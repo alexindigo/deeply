@@ -52,13 +52,13 @@
     "url": "https://github.com/alexindigo/deeply/issues"
   },
   "devDependencies": {
-    "browserify": "^16.2.2",
+    "browserify": "^16.2.3",
     "browserify-istanbul": "^3.0.1",
     "coveralls": "^3.0.2",
-    "eslint": "^5.3.0",
+    "eslint": "^5.9.0",
     "istanbul": "^0.4.5",
     "lodash.partialright": "^4.2.1",
-    "nyc": "^12.0.2",
+    "nyc": "^13.1.0",
     "obake": "^0.1.2",
     "phantomjs-prebuilt": "^2.1.12",
     "pre-commit": "^1.1.3",
