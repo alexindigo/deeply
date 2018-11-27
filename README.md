@@ -4,9 +4,9 @@ A toolkit for deep structure manipulations, provides deep merge/clone functional
 and exposes hooks and custom adapters for more control and greater flexibility.
 
 [![PhantomJS Build](https://img.shields.io/travis/alexindigo/deeply/canary.svg?label=browser&style=flat)](https://travis-ci.org/alexindigo/deeply)
-[![Linux Build](https://img.shields.io/travis/alexindigo/deeply/canary.svg?label=linux:0.10-6.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
-[![MacOS Build](https://img.shields.io/travis/alexindigo/deeply/canary.svg?label=macos:0.10-6.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
-[![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/deeply/canary.svg?label=windows:0.10-6.x&style=flat)](https://ci.appveyor.com/project/alexindigo/deeply)
+[![Linux Build](https://img.shields.io/travis/alexindigo/deeply/canary.svg?label=linux:6.x-11.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
+[![MacOS Build](https://img.shields.io/travis/alexindigo/deeply/canary.svg?label=macos:6.x-11.x&style=flat)](https://travis-ci.org/alexindigo/deeply)
+[![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/deeply/canary.svg?label=windows:6.x-11.x&style=flat)](https://ci.appveyor.com/project/alexindigo/deeply)
 
 [![Coverage Status](https://img.shields.io/coveralls/alexindigo/deeply/canary.svg?label=code+coverage&style=flat)](https://coveralls.io/github/alexindigo/deeply?branch=canary)
 [![Dependency Status](https://img.shields.io/david/alexindigo/deeply.svg?style=flat)](https://david-dm.org/alexindigo/deeply)
@@ -14,11 +14,11 @@ and exposes hooks and custom adapters for more control and greater flexibility.
 
 [![Readme](https://img.shields.io/badge/readme-tested-brightgreen.svg?style=flat)](https://www.npmjs.com/package/reamde)
 
-| compression      |     size |
-| :--------------- | -------: |
-| deeply.js        | 15.08 kB |
-| deeply.min.js    |  4.95 kB |
-| deeply.min.js.gz |  1.48 kB |
+| compression      |    size |
+| :--------------- | ------: |
+| deeply.js        | 15.6 kB |
+| deeply.min.js    | 5.11 kB |
+| deeply.min.js.gz | 1.53 kB |
 
 
 ## Table of Contents
@@ -38,6 +38,8 @@ and exposes hooks and custom adapters for more control and greater flexibility.
     - [Cloning Prototype Chain](#cloning-prototype-chain)
     - [Extend Original Function Prototype](#extend-original-function-prototype)
   - [Custom hooks](#custom-hooks)
+    - [`useCustomAdapters`](#usecustomadapters)
+    - [`useCustomTypeOf`](#usecustomtypeof)
   - [Mutable Operations](#mutable-operations)
   - [Ludicrous Mode](#ludicrous-mode)
 - [Want to Know More?](#want-to-know-more)
@@ -360,6 +362,8 @@ assert.equal(s2 instanceof Subj, true);
 
 ### Custom hooks
 
+#### `useCustomAdapters`
+
 As shown in [Custom Merge Function](#custom-merge-function) example,
 you can add custom adapters for any data type
 that supported by [precise-typeof](https://www.npmjs.com/precise-typeof).
@@ -387,6 +391,33 @@ function addNumbers(to, from)
   return (to || 0) + from;
 }
 ```
+
+#### `useCustomTypeOf`
+
+In some cases you might need to have more control over type detection,
+for that you can supply your own type detection function.
+
+In following example we'd use same `precise-typeof` library,
+but with `pojoOnly: true` flag:
+
+```javascript
+var merge = require('deeply');
+var typeOf = require('precise-typeof');
+var moment = require('moment');
+
+var context =
+{
+  useCustomTypeOf: merge.behaviors.useCustomTypeOf,
+  'typeof'       : (input) => typeOf(input, {pojoOnly: true})
+};
+
+var result = merge.call(context, { a: {someField: 'value'}, b: 'other thing'}, { a: moment.utc('2018-11-27') });
+
+assert.equal(result, { a: moment.utc('2018-11-27'), b: 'other thing' });
+```
+
+In the above example, it would treat `moment` object as atomic,
+and won't mix it's properties with other properties.
 
 ### Mutable Operations
 

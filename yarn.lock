@@ -3214,6 +3214,11 @@ module-deps@^6.0.0:
     through2 "^2.0.0"
     xtend "^4.0.0"
 
+moment@^2.22.2:
+  version "2.22.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
+  integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -4992,9 +4997,9 @@ uglify-js@^3.1.4:
     commander "~2.17.1"
     source-map "~0.6.1"
 
-"uglify-stream@git+https://github.com/michaelrhodes/uglify-stream#1.1.1":
+uglify-stream@michaelrhodes/uglify-stream#1.1.1:
   version "1.1.1"
-  resolved "git+https://github.com/michaelrhodes/uglify-stream#0a6a56b9101e2339af159a346d4b901d9480c5c8"
+  resolved "https://codeload.github.com/michaelrhodes/uglify-stream/tar.gz/0a6a56b9101e2339af159a346d4b901d9480c5c8"
   dependencies:
     duplexify "^3.0.1"
     uglify-js "^2.4.15"

@@ -20,13 +20,14 @@ function merge(to, from)
   // if no suitable adapters found
   // just return overriding value
   var result  = from
-    , type    = preciseTypeOf(from)
-    , adapter = getTypeAdapter.call(this, type)
+    , typeOf  = getTypeOfAdapter.call(this)
+    , type    = typeOf(from)
+    , adapter = getMergeByTypeAdapter.call(this, type)
     ;
 
   // if target object isn't the same type as the source object,
   // then override with new instance of the same type
-  if (preciseTypeOf(to) != type)
+  if (typeOf(to) != type)
   {
     to = getInitialValue(type, adapter);
   }
@@ -39,13 +40,32 @@ function merge(to, from)
 }
 
 /**
+ * Returns typeof adapter, either default one or custom one if provided
+ *
+ * @returns {function} - typeof custom adapter or default one
+ */
+function getTypeOfAdapter()
+{
+  var adapter = preciseTypeOf;
+
+  // only if usage of custom adapters is authorized
+  // to prevent global context leaking in
+  if (this.useCustomTypeOf === behaviors.useCustomTypeOf)
+  {
+    adapter = this['typeof'];
+  }
+
+  return adapter;
+}
+
+/**
  * Returns merge adapter for the requested type
  * either default one or custom one if provided
  *
  * @param   {string} type - hook type to look for
  * @returns {function} - merge adapter or pass-thru function, if not adapter found
  */
-function getTypeAdapter(type)
+function getMergeByTypeAdapter(type)
 {
   var adapter = adapters[type] || passThru;
 

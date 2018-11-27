@@ -1,6 +1,8 @@
 var test      = require('tape').test
   , partial   = require('lodash.partialright')
+  , typeOf    = require('precise-typeof')
   , deeply    = require('../')
+  , moment    = require('moment')
   , stringify = partial(require('util').inspect, {depth: 8})
   , now       = new Date()
   , withStuffOnPrototype
@@ -52,6 +54,30 @@ var inout = [
     ],
     out: {
       a: {a: {a: 1}, b: [1,2,4], c: now, d: new Boolean(true), e: new Number(1), f: new String('abc')}
+    }
+  }
+
+  // non-pojo objects
+  , {
+    customTypeOf: {
+      typeof: function(input) { return typeOf(input, {pojoOnly: true}); }
+    },
+    in: [
+      {
+        a: {datetime: 'now'},
+        b: moment.utc('2017-11-27'),
+        c: moment.utc('2018-05-25')
+      },
+      {
+        a: moment.utc('2018-11-27'),
+        b: {pojo: {on: 'top'}},
+        c: moment.utc('2018-08-12')
+      }
+    ],
+    out: {
+      a: moment.utc('2018-11-27'),
+      b: {pojo: {on: 'top'}},
+      c: moment.utc('2018-08-12')
     }
   }
 
@@ -199,6 +225,11 @@ test('merge', function test_deep_merge(t)
     {
       context = pair.customAdapters;
       context['useCustomAdapters'] = deeply.behaviors.useCustomAdapters;
+    }
+    else if ('customTypeOf' in pair)
+    {
+      context = pair.customTypeOf;
+      context['useCustomTypeOf'] = deeply.behaviors.useCustomTypeOf;
     }
 
     // default - immutable
