@@ -51,15 +51,21 @@
   "bugs": {
     "url": "https://github.com/alexindigo/deeply/issues"
   },
+  "resolutions": {
+    "toc-md/vow-fs": "^0.3.6",
+    "toc-md/marked": "^0.3.18"
+  },
   "devDependencies": {
     "browserify": "^16.2.3",
     "browserify-istanbul": "^3.0.1",
-    "coveralls": "^3.0.2",
+    "coveralls": "^3.0.4",
     "eslint": "^5.9.0",
+    "handlebars": "^4.1.2",
     "istanbul": "^0.4.5",
+    "js-yaml": "^3.13.1",
     "lodash.partialright": "^4.2.1",
     "moment": "^2.22.2",
-    "nyc": "^13.1.0",
+    "nyc": "^14.1.1",
     "obake": "^0.1.2",
     "phantomjs-prebuilt": "^2.1.12",
     "pre-commit": "^1.1.3",
