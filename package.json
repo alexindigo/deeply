@@ -4,7 +4,7 @@
   "description": "A toolkit for deep structure manipulations, provides deep merge/clone functionality out of the box, and exposes hooks and custom adapters for more control and greater flexibility.",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf coverage",
+    "clean": "rimraf .nyc_output coverage",
     "lint": "eslint *.js adapters/*.js test/*.js",
     "test": "nyc --reporter=json tape test/test-*.js | tap-spec",
     "browser": "browserify -t browserify-istanbul test/test-compatibility.js | obake --coverage | tap-spec",

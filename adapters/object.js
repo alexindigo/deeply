@@ -17,7 +17,8 @@ module.exports = objectAdapter;
 function objectAdapter(to, from, merge)
 {
   // transfer source values
-  reduceObject(to, from, merge);
+  // pass context down the line, to allow behavior overrides
+  reduceObject.call(this, to, from, merge);
 
   return to;
 }
