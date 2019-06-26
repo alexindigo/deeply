@@ -1,14 +1,17 @@
+sudo: false
+
 language: node_js
 
 node_js:
   - "6"
   - "8"
   - "10"
-  - "11"
+  - "12"
 
 os:
   - osx
   - linux
+#  - windows
 
 install:
   - travis_retry yarn install
@@ -18,11 +21,12 @@ script:
   - node --version
   - npm --version
   # linting
-  - npm run lint
+  - if [ "$TRAVIS_OS_NAME" != "windows" ]; then npm run lint; fi
   # testing
   - npm run clean
   - npm run test
   - npm run browser
   - npm run report
+
 after_success:
   - "cat coverage/lcov.info | ./node_modules/.bin/coveralls"
