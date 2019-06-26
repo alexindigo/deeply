@@ -14,11 +14,11 @@ and exposes hooks and custom adapters for more control and greater flexibility.
 
 [![Readme](https://img.shields.io/badge/readme-tested-brightgreen.svg?style=flat)](https://www.npmjs.com/package/reamde)
 
-| compression      |    size |
-| :--------------- | ------: |
-| deeply.js        | 15.6 kB |
-| deeply.min.js    | 5.11 kB |
-| deeply.min.js.gz | 1.53 kB |
+| compression      |     size |
+| :--------------- | -------: |
+| deeply.js        | 16.35 kB |
+| deeply.min.js    |  5.36 kB |
+| deeply.min.js.gz |  1.63 kB |
 
 
 ## Table of Contents
@@ -27,6 +27,7 @@ and exposes hooks and custom adapters for more control and greater flexibility.
 - [Install](#install)
 - [Examples](#examples)
   - [Merging](#merging)
+    - [Security concerns](#security-concerns)
   - [Cloning](#cloning)
   - [Arrays Custom Merging](#arrays-custom-merging)
     - [Default Behavior](#default-behavior)
@@ -37,7 +38,8 @@ and exposes hooks and custom adapters for more control and greater flexibility.
   - [Cloning Functions](#cloning-functions)
     - [Cloning Prototype Chain](#cloning-prototype-chain)
     - [Extend Original Function Prototype](#extend-original-function-prototype)
-  - [Custom hooks](#custom-hooks)
+  - [Custom flags and hooks](#custom-flags-and-hooks)
+    - [`allowDangerousObjectKeys`](#allowdangerousobjectkeys)
     - [`useCustomAdapters`](#usecustomadapters)
     - [`useCustomTypeOf`](#usecustomtypeof)
   - [Mutable Operations](#mutable-operations)
@@ -69,6 +71,22 @@ var merge = require('deeply');
 var result = merge({a: {a1: 1}}, {a: {a2: 2}}, {b: {b3: 3}});
 
 assert.equal(result, {a: {a1: 1, a2: 2}, b: {b3: 3}});
+```
+
+#### Security concerns
+
+Due to Prototype Pollution security vulnerability concerns, default behavior of when merging objects is to skip unsafe keys, like `__proto__`, please refer to the [test/compatability.js](test/compatability.js) file for code examples.
+
+If there is a use case where such behavior is desired, pass `allowDangerousObjectKeys` flag to the context to skip keys safety checks.
+
+```javascript
+var merge = require('deeply');
+var result;
+
+var context = { allowDangerousObjectKeys: merge.behaviors.allowDangerousObjectKeys };
+
+result = merge.call(context, {}, JSON.parse('{"__proto__": {"a0": true}}'));
+// end of the world, cats live with dogs...
 ```
 
 ### Cloning
@@ -360,7 +378,16 @@ assert.equal(s1 instanceof Subj, true);
 assert.equal(s2 instanceof Subj, true);
 ```
 
-### Custom hooks
+### Custom flags and hooks
+
+#### `allowDangerousObjectKeys`
+
+As shown in (Security Concerns)[#security-concerns] section,
+you can skip safety checks for unsafe object keys (e.g. `__proto__`) by passing `allowDangerousObjectKeys` flag to the context.
+
+```js
+merge.call({ allowDangerousObjectKeys: merge.behaviors.allowDangerousObjectKeys }, {}, JSON.parse('{"__proto__": {"a0": true}}'));
+```
 
 #### `useCustomAdapters`
 

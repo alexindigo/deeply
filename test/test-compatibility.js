@@ -181,6 +181,27 @@ var inout = [
   , {in: ['ABC', 25, true], out: true}
   , {in: [{a: 13}], out: {a: 13}}
   , {in: [now], out: now}
+
+  // security
+  , {
+    in: [{}, JSON.parse('{"a": 1, "__proto__": {"a0": true}}')],
+    out: {a: 1},
+    // don't expect to see `a0` on object prototype
+    afterTest: function() { return !('a0' in {}); }
+  }
+  , {
+    in: [{}, JSON.parse('{"a": 1, "__proto__": {"a0": true}}')],
+    out: {a: 1},
+    // expect to see `a0` on object prototype
+    // with allowed dangerous keys flag
+    allowDangerousObjectKeys: true,
+    afterTest: function() {
+      var affected = ({})['a0'] === true;
+      // clean up proto pollution
+      delete ({}).__proto__['a0'];
+      return affected;
+    }
+  }
 ];
 
 /**
@@ -213,6 +234,7 @@ test('merge', function test_deep_merge(t)
 
   // extra sub tests
   expectedTestsNum += inout.filter(function(pair){ return pair.in.length == 1 && typeof pair.modify == 'function'; }).length;
+  expectedTestsNum += inout.filter(function(pair){ return typeof pair.afterTest == 'function'; }).length;
 
   t.plan(expectedTestsNum);
 
@@ -231,6 +253,11 @@ test('merge', function test_deep_merge(t)
       context = pair.customTypeOf;
       context['useCustomTypeOf'] = deeply.behaviors.useCustomTypeOf;
     }
+    else if (pair.allowDangerousObjectKeys)
+    {
+      context = {};
+      context['allowDangerousObjectKeys'] = deeply.behaviors.allowDangerousObjectKeys;
+    }
 
     // default - immutable
 
@@ -243,6 +270,10 @@ test('merge', function test_deep_merge(t)
       pair.modify(pair.in[0], res);
       // check that object's don't equal after modification
       t.notDeepEqual(stringify(res), stringify(pair.in[0]), 'modified '+stringify(pair.in[0])+' should not be equal to '+stringify(res));
+    }
+
+    if (typeof pair.afterTest == 'function') {
+      t.ok(pair.afterTest(res), 'afterTest run should return truthy result');
     }
   });
 });
